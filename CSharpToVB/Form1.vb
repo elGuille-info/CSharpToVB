@@ -19,8 +19,7 @@ Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.Emit
 Imports Microsoft.VisualBasic.FileIO
 
-
-#If NETCOREAPP3_1 Then
+#If Not (NET5_0 OrElse Net4_8) Then
 Imports VBMsgBox
 #End If
 
@@ -36,6 +35,7 @@ Partial Public Class Form1
 
     Private _currentBuffer As Control
 
+    Private _doNotFailOnError As Boolean
     Private _findDiablog As FindDialog
 
     Private _inColorize As Boolean
@@ -43,7 +43,6 @@ Partial Public Class Form1
     Private _requestToConvert As ConvertRequest
 
     Private _resultOfConversion As ConversionResult
-    Private _doNotFailOnError As Boolean
 
     Public Sub New()
         Me.InitializeComponent()
@@ -573,6 +572,10 @@ Partial Public Class Form1
         mnuConvertConvertSnippet.Enabled = ConversionInput.TextLength > 0
     End Sub
 
+    Private Sub mnuConvert_DropDownOpened(sender As Object, e As EventArgs) Handles mnuConvert.DropDownOpened
+        mnuConvertConvertSnippet.Enabled = ConversionInput.TextLength > 0
+    End Sub
+
     Private Async Sub mnuConvertConvertSnippet_Click(sender As Object, e As EventArgs) Handles mnuConvertConvertSnippet.Click
         SetButtonStopAndCursor(MeForm:=Me, StopButton:=ButtonStopConversion, StopButtonVisible:=True)
         ListBoxErrorList.Items.Clear()
@@ -603,6 +606,7 @@ Partial Public Class Form1
             KeyValuePair.Create(Of String, Object)(My.Settings.Framework, True)
             }
 #End If
+
             Dim DontDisplayLineNumbers As Boolean = Await Me.Convert_Compile_ColorizeAsync(_requestToConvert, CSPreprocessorSymbols, VBPreprocessorSymbols, SharedReferences.CSharpReferences(Assembly.Load("System.Windows.Forms").Location, OptionalReference:=Nothing).ToArray, _cancellationTokenSource.Token).ConfigureAwait(True)
             If _requestToConvert.CancelToken.IsCancellationRequested Then
                 MsgBox($"Conversion canceled.",
@@ -745,6 +749,10 @@ Partial Public Class Form1
         If sourceControl IsNot Nothing AndAlso sourceControl.CanUndo Then
             sourceControl.Undo()
         End If
+    End Sub
+
+    Private Sub mnuFile_DropDownOpening(sender As Object, e As EventArgs) Handles mnuFile.DropDownOpening
+        mnuFileLoadLastSnippet.Enabled = File.Exists(s_snippetFileWithPath)
     End Sub
 
     Private Sub mnuFileExit_Click(sender As Object, e As EventArgs) Handles mnuFileExit.Click
@@ -996,22 +1004,6 @@ Partial Public Class Form1
         My.Settings.Save()
     End Sub
 
-
-    Private Sub UpdateLastFileMeus()
-        My.Settings.Save()
-        ' show separator...
-        If My.Settings.MRU_Data.Count > 0 Then
-            mnuFileLastFolder.Text = Path.GetDirectoryName(My.Settings.MRU_Data.Last)
-            mnuFileLastFolder.Visible = True
-            mnuFileSep1.Visible = True
-            mnuFileSep2.Visible = True
-        Else
-            mnuFileLastFolder.Visible = False
-            mnuFileSep1.Visible = False
-            mnuFileSep2.Visible = False
-        End If
-    End Sub
-
     Private Sub OpenSourceFile(FileNameWithPath As String)
         mnuConvertConvertSnippet.Enabled = Me.LoadInputBufferFromStream(FileNameWithPath) <> 0
         mnuAddToMRU(My.Settings.MRU_Data, FileNameWithPath)
@@ -1243,9 +1235,10 @@ Partial Public Class Form1
         Dim TotalFilesToProcess As Integer = currentProject.Documents.Count
         Dim convertedFramework As String = FrameworkNameToConstant(Framework)
         Dim CSPreprocessorSymbols As New List(Of String) From {Framework, convertedFramework}
+
 #If NET48 Then
         Dim VBPreprocessorSymbols As New List(Of KeyValuePair(Of String, Object)) From {
-                                  New KeyValuePair(Of String, Object)(convertedFramework, True)}
+                                    New KeyValuePair(Of String, Object)(convertedFramework, True)}
         If Not convertedFramework.Equals(Framework, StringComparison.OrdinalIgnoreCase) Then
             VBPreprocessorSymbols.Add(New KeyValuePair(Of String, Object)(Framework, True))
         End If
@@ -1455,6 +1448,21 @@ Partial Public Class Form1
         Next
     End Sub
 
+    Private Sub UpdateLastFileMeus()
+        My.Settings.Save()
+        ' show separator...
+        If My.Settings.MRU_Data.Count > 0 Then
+            mnuFileLastFolder.Text = Path.GetDirectoryName(My.Settings.MRU_Data.Last)
+            mnuFileLastFolder.Visible = True
+            mnuFileSep1.Visible = True
+            mnuFileSep2.Visible = True
+        Else
+            mnuFileLastFolder.Visible = False
+            mnuFileSep1.Visible = False
+            mnuFileSep2.Visible = False
+        End If
+    End Sub
+
     Private Sub UpdateProgressLabels(progressStr As String, Value As Boolean)
         If InvokeRequired Then
             Me.Invoke(Sub()
@@ -1509,7 +1517,7 @@ Partial Public Class Form1
         Me.OpenSourceFile(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(startIndex:=4))
     End Sub
 
-#If NETCOREAPP3_1 Then
+#If Not (NET5_0 OrElse Net4_8) Then
 
     <STAThread()>
     Shared Sub main(args As String())
@@ -1517,14 +1525,6 @@ Partial Public Class Form1
         Using MyApp As New My.MyApplication
             MyApp.Run(args)
         End Using
-    End Sub
-
-    Private Sub mnuConvert_DropDownOpened(sender As Object, e As EventArgs) Handles mnuConvert.DropDownOpened
-        mnuConvertConvertSnippet.Enabled = ConversionInput.TextLength > 0
-    End Sub
-
-    Private Sub mnuFile_DropDownOpening(sender As Object, e As EventArgs) Handles mnuFile.DropDownOpening
-        mnuFileLoadLastSnippet.Enabled = File.Exists(s_snippetFileWithPath)
     End Sub
 
 #End If

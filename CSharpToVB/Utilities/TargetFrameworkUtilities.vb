@@ -47,7 +47,7 @@ Module TargetFrameworkUtilities
     ''' <returns></returns>
     Friend Function FrameworkNameToConstant(Framework As String) As String
         If Framework = "netcoreapp5.0" Then
-            Return "NETCOREAPP5_0"
+            Return "NET5_0"
         End If
         Return Framework.ToUpperInvariant.Replace(".", "_", StringComparison.OrdinalIgnoreCase)
     End Function

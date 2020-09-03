@@ -5,7 +5,7 @@
 Imports System.IO
 Imports System.Xml
 
-#If NETCOREAPP3_1 Then
+#If Not (NET5_0 OrElse Net4_8) Then
 Imports VBMsgBox
 #End If
 

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace></RootNamespace>
-    <TargetFrameworks>netcoreapp3.1;net48</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <OptionCompare>Text</OptionCompare>
     <OptionExplicit>On</OptionExplicit>
     <OptionInfer>Off</OptionInfer>

@@ -237,7 +237,7 @@ Partial Public Class Form1
 
     Private Sub ConversionInput_TextChanged(sender As Object, e As EventArgs) Handles ConversionInput.TextChanged
         Dim inputBufferInUse As Boolean = Me.SetSearchControls(True)
-        mnuViewShowSourceLineNumbers.Checked = InputBufferInUse And My.Settings.ShowSourceLineNumbers
+        mnuViewShowSourceLineNumbers.Checked = inputBufferInUse And My.Settings.ShowSourceLineNumbers
         If mnuOptionsColorizeSource.Checked AndAlso Not _inColorize Then
             Me.Colorize(GetClassifiedRanges(SourceCode:=ConversionInput.Text, LanguageNames.CSharp), ConversionBuffer:=ConversionInput, Lines:=ConversionInput.Lines.Length)
         End If
@@ -1677,15 +1677,4 @@ Partial Public Class Form1
 
 #End Region
 
-#If Not (NET48 OrElse NET5_0) Then
-
-    <STAThread()>
-    Shared Sub main(args As String())
-        Application.SetHighDpiMode(HighDpiMode.PerMonitorV2)
-        Using MyApp As New My.MyApplication
-            MyApp.Run(args)
-        End Using
-    End Sub
-
-#End If
 End Class

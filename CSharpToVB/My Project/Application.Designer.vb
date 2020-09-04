@@ -16,7 +16,7 @@ Namespace Global.My
     ' Solution Explorer), and make changes on the Application tab.
     '
     Partial Friend Class MyApplication
-#If Not (NET5_0 OrElse Net4_8) Then
+#If NET5_0 OrElse Net4_8 Then
         Inherits Global.Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase
 #Else
         Inherits ApplicationServices.WindowsFormsApplicationBase
@@ -33,7 +33,7 @@ Namespace Global.My
             Me.IsSingleInstance = True
             Me.MinimumSplashScreenDisplayTime = 5000
             Me.SaveMySettingsOnExit = True
-#If Not (NET5_0 OrElse Net4_8) Then
+#If Not NET5_0 OrElse Net4_8 Then
             Me.ShutdownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
 #Else
             Me.ShutdownStyle = ApplicationServices.ShutdownMode.AfterMainFormCloses

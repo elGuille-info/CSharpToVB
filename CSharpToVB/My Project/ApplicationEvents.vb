@@ -29,10 +29,9 @@ Namespace Global.My
         End Sub
 
         Private Sub MyApplication_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
-#If NET48 OrElse NET5_0 Then
-            AppFramework.SetHighDpiMode(HighDpiMode.SystemAware)
+#If Not (NET48 OrElse NET5_0) Then
             ' Get the splash screen.
-            Forms.SplashScreen1.UserName.Text = "Current user: " & User.Name
+            Me.SplashScreen1.UserName.Text = "Current user: " & User.Name
 #End If
         End Sub
 

@@ -10,7 +10,8 @@
             MyApp.Run(args)
         End Using
 #Else
-        Application.Run(New Form1)
+        Dim MyApp As New My.MyApplication
+        MyApp.Run(args)
 #End If
     End Sub
 

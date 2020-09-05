@@ -9,7 +9,9 @@ Imports HashLibrary
 
 Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.Shared.Extensions
+
 Namespace CSharpToVBConverter
+
     Partial Friend Class SymbolEquivalenceComparer
 
         <ExcludeFromCodeCoverage>
@@ -232,4 +234,5 @@ Namespace CSharpToVBConverter
         End Class
 
     End Class
+
 End Namespace

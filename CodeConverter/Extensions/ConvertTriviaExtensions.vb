@@ -28,6 +28,7 @@ Namespace CSharpToVBConverter
 
         <Extension>
         Friend Function ConvertTrivia(t As SyntaxTrivia) As SyntaxTrivia
+
 #Region "Non-structured Trivia"
 
             Select Case t.RawKind

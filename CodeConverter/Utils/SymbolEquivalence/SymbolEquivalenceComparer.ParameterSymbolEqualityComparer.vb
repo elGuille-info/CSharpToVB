@@ -7,6 +7,7 @@ Imports System.Diagnostics.CodeAnalysis
 Imports Microsoft.CodeAnalysis
 
 Namespace CSharpToVBConverter
+
     Partial Friend Class SymbolEquivalenceComparer
 
         <ExcludeFromCodeCoverage>
@@ -65,4 +66,5 @@ Namespace CSharpToVBConverter
         End Class
 
     End Class
+
 End Namespace

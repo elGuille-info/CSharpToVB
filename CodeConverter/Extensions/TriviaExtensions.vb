@@ -12,7 +12,6 @@ Imports VB = Microsoft.CodeAnalysis.VisualBasic
 Namespace CSharpToVBConverter
     Public Module TriviaExtensions
 
-
         <Extension>
         Friend Function AdjustWhitespace(Trivia As SyntaxTrivia, nextTrivia As SyntaxTrivia, afterLineContinue As Boolean) As SyntaxTrivia
             If Trivia.Span.Length = nextTrivia.Span.Length Then

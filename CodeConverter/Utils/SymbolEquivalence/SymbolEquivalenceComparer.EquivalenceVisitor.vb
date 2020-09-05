@@ -8,6 +8,7 @@ Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.Shared.Extensions
 
 Namespace CSharpToVBConverter
+
     Partial Friend Class SymbolEquivalenceComparer
 
         Private Class EquivalenceVisitor

@@ -12,6 +12,7 @@ Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
 Imports Factory = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory
 Imports VB = Microsoft.CodeAnalysis.VisualBasic
+
 Namespace CSharpToVBConverter
 
     <EditorBrowsable(EditorBrowsableState.Never)>

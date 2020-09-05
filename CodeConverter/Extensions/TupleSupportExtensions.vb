@@ -12,6 +12,7 @@ Imports VBS = Microsoft.CodeAnalysis.VisualBasic.Syntax
 Namespace CSharpToVBConverter.ToVisualBasic
 
     Public Module TupleSupportExtensions
+
         ''' <summary>
         ''' Extract String
         ''' </summary>

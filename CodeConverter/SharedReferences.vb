@@ -9,6 +9,7 @@ Imports System.Reflection.PortableExecutable
 Imports System.Runtime.CompilerServices
 
 Imports Microsoft.CodeAnalysis
+
 Namespace CSharpToVBConverter
 
     Public Module SharedReferences

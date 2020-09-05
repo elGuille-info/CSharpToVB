@@ -5,11 +5,13 @@
 Imports Microsoft.VisualBasic.ApplicationServices
 
 #If NET5_0 Then
+
 Imports Microsoft.VisualBasic.Devices
+
 #End If
 
-
 Namespace Global.My
+
     ' The following events are available for MyApplication:
     ' Startup: Raised when the application starts, before the startup form is created.
     ' Shutdown: Raised after all application forms are closed.  This event is not raised if the application terminates abnormally.
@@ -20,9 +22,11 @@ Namespace Global.My
         Inherits WindowsFormsApplicationBase
 
 #If NET5_0 Then
+
         Private Sub MyApplication_NetworkAvailabilityChanged(sender As Object, e As NetworkAvailableEventArgs) Handles Me.NetworkAvailabilityChanged
             ' My.Forms.Form1.SetConnectionStatus(e.IsNetworkAvailable)
         End Sub
+
 #End If
 
         Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
@@ -46,5 +50,7 @@ Namespace Global.My
         Private Sub MyApplication_UnhandledException(sender As Object, e As UnhandledExceptionEventArgs) Handles Me.UnhandledException
             ' My.Application.Log.WriteException(e.Exception, TraceEventType.Critical, "Unhandled Exception.")
         End Sub
+
     End Class
+
 End Namespace

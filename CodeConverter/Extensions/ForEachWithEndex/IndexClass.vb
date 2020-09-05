@@ -24,4 +24,5 @@ Namespace CSharpToVBConverter
         End Sub
 
     End Class
+
 End Namespace

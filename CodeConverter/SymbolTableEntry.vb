@@ -16,4 +16,5 @@ Namespace CSharpToVBConverter
         Public ReadOnly Property IsType As Boolean
         Public ReadOnly Property Name As String
     End Class
+
 End Namespace

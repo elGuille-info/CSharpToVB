@@ -2,6 +2,7 @@
 ' The .NET Foundation licenses this file to you under the MIT license.
 ' See the LICENSE file in the project root for more information.
 Namespace CSharpToVBConverter
+
     Public Structure ProgressReport
         Implements IEquatable(Of ProgressReport)
 
@@ -26,11 +27,12 @@ Namespace CSharpToVBConverter
         Return (Current, Maximum).GetHashCode()
     End Function
 #Else
+
         Public Overrides Function GetHashCode() As Integer
             Return HashCode.Combine(Current, Maximum)
         End Function
-#End If
 
+#End If
 
         Public Shared Operator =(left As ProgressReport, right As ProgressReport) As Boolean
             Return left.Equals(right)
@@ -41,4 +43,5 @@ Namespace CSharpToVBConverter
         End Operator
 
     End Structure
+
 End Namespace

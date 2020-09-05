@@ -3,6 +3,7 @@
 ' See the LICENSE file in the project root for more information.
 
 Imports System.Threading
+
 Namespace CSharpToVBConverter
 
     Public Class ConvertRequest
@@ -19,4 +20,5 @@ Namespace CSharpToVBConverter
         Public Property SourceCode As String
 
     End Class
+
 End Namespace

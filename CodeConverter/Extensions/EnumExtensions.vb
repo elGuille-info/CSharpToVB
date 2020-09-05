@@ -6,6 +6,7 @@ Imports System.ComponentModel
 Imports System.Diagnostics.CodeAnalysis
 Imports System.Reflection
 Imports System.Runtime.CompilerServices
+
 Namespace CSharpToVBConverter
 
     ''' <summary>

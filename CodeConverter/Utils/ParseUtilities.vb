@@ -6,6 +6,7 @@ Imports Microsoft.CodeAnalysis
 
 Imports CS = Microsoft.CodeAnalysis.CSharp
 Imports VB = Microsoft.CodeAnalysis.VisualBasic
+
 Namespace CSharpToVBConverter
 
     Public Module ParseUtilities

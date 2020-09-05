@@ -33,6 +33,7 @@ Namespace CSharpToVBConverter.ToVisualBasic
             Private _membersList As SyntaxList(Of VBS.StatementSyntax)
             Public ReadOnly AllImports As New List(Of VBS.ImportsStatementSyntax)()
             Public ReadOnly InlineAssignHelperMarkers As New List(Of CSS.BaseTypeDeclarationSyntax)()
+
             'Public ReadOnly ByRefHelperMarkers As New List(Of CSS.BaseTypeDeclarationSyntax)()
             Public VBHeaderLeadingTrivia As SyntaxTriviaList
 
@@ -210,7 +211,6 @@ Namespace CSharpToVBConverter.ToVisualBasic
                                              Factory.List(ListOfAttributes),
                                              _membersList,
                                              EndOfFileToken.WithConvertedTriviaFrom(node.EndOfFileToken))
-
                 Else
                     _membersList = _membersList.Add(Factory.EmptyStatement.WithLeadingTrivia(VBHeaderLeadingTrivia))
                     compilationUnitSyntax1 = Factory.CompilationUnit(options:=Nothing,

@@ -7,9 +7,11 @@ Imports System.Runtime.CompilerServices
 Imports Microsoft.CodeAnalysis
 Imports Factory = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory
 Imports VBS = Microsoft.CodeAnalysis.VisualBasic.Syntax
+
 Namespace CSharpToVBConverter
 
     Public Module ISymbolExtensions
+
         <Extension>
         Private Function ActionType(compilation As Compilation) As INamedTypeSymbol
             Return compilation.GetTypeByMetadataName(GetType(Action).FullName)

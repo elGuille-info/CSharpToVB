@@ -9,9 +9,11 @@ Imports Microsoft.CodeAnalysis
 Imports CSS = Microsoft.CodeAnalysis.CSharp.Syntax
 Imports Factory = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory
 Imports VBS = Microsoft.CodeAnalysis.VisualBasic.Syntax
+
 Namespace CSharpToVBConverter
 
     Public Module StatementExtensions
+
         <Extension>
         Friend Function ContainsName(ImportList As List(Of VBS.ImportsStatementSyntax), ImportName As String) As Boolean
             For Each ImportToCheck As VBS.ImportsStatementSyntax In ImportList
@@ -23,7 +25,6 @@ Namespace CSharpToVBConverter
             Next
             Return False
         End Function
-
 
         <Extension>
         Friend Function RestructureArguments(VB_Node As VBS.StatementSyntax, csArgumentList As CSS.ArgumentListSyntax) As VBS.StatementSyntax

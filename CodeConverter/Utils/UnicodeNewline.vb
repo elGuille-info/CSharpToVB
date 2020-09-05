@@ -5,6 +5,7 @@
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
 Imports System.Text
+
 Namespace CSharpToVBConverter
 
     Public Enum UnicodeNewline

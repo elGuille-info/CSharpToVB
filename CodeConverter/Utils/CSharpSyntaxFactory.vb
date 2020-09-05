@@ -4,6 +4,7 @@
 
 Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.CSharp
+
 Namespace CSharpToVBConverter
     Public Module CSharpSyntaxFactory
         Public ReadOnly CSCloseBraceToken As SyntaxToken = SyntaxFactory.Token(SyntaxKind.CloseBraceToken)

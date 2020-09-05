@@ -6,6 +6,7 @@ Imports System.Runtime.CompilerServices
 Imports Microsoft.CodeAnalysis
 Imports VB = Microsoft.CodeAnalysis.VisualBasic
 Imports VBS = Microsoft.CodeAnalysis.VisualBasic.Syntax
+
 Namespace CSharpToVBConverter
     Module ArgumentSyntaxExtensions
 

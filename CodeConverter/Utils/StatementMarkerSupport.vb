@@ -282,7 +282,6 @@ Namespace CSharpToVBConverter
                     Return StatementWithIssues
                 End If
 
-
                 If TypeOf StatementWithIssues Is CSS.StatementSyntax Then
                     Dim StatementWithIssueParent As SyntaxNode = StatementWithIssues.Parent
                     While StatementWithIssueParent.IsKind(CS.SyntaxKind.ElseClause)

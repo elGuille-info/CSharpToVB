@@ -4,11 +4,12 @@
 
 Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.CSharp
+Namespace CSharpToVBConverter
+    Public Module CSharpSyntaxFactory
+        Public ReadOnly CSCloseBraceToken As SyntaxToken = SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
+        Public ReadOnly CSReadOnlyKeyword As SyntaxToken = SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)
+        Public ReadOnly CSEmptySpaceTrivia As SyntaxTrivia = SyntaxFactory.Whitespace(String.Empty)
+        Public ReadOnly CSSpaceTrivia As SyntaxTrivia = SyntaxFactory.Space
 
-Public Module CSharpSyntaxFactory
-    Public ReadOnly CSCloseBraceToken As SyntaxToken = SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
-    Public ReadOnly CSReadOnlyKeyword As SyntaxToken = SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)
-    Public ReadOnly CSEmptySpaceTrivia As SyntaxTrivia = SyntaxFactory.Whitespace(String.Empty)
-    Public ReadOnly CSSpaceTrivia As SyntaxTrivia = SyntaxFactory.Space
-
-End Module
+    End Module
+End Namespace

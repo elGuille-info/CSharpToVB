@@ -5,22 +5,24 @@
 Imports System.Runtime.CompilerServices
 
 Imports Microsoft.CodeAnalysis
+Namespace CSharpToVBConverter
 
-Public Module TypeInfoExtensions
+    Public Module TypeInfoExtensions
 
-    <Extension>
-    Friend Function IsString(_Typeinfo As TypeInfo) As Boolean
-        Dim typeSymbol As ITypeSymbol = _Typeinfo.Type
+        <Extension>
+        Friend Function IsString(_Typeinfo As TypeInfo) As Boolean
+            Dim typeSymbol As ITypeSymbol = _Typeinfo.Type
 
-        If typeSymbol Is Nothing OrElse typeSymbol.IsErrorType Then
+            If typeSymbol Is Nothing OrElse typeSymbol.IsErrorType Then
+                Return False
+            End If
+
+            If typeSymbol.ToString.RemoveAll("?").Equals("string", StringComparison.OrdinalIgnoreCase) Then
+                Return True
+            End If
+
             Return False
-        End If
+        End Function
 
-        If typeSymbol.ToString.RemoveAll("?").Equals("string", StringComparison.OrdinalIgnoreCase) Then
-            Return True
-        End If
-
-        Return False
-    End Function
-
-End Module
+    End Module
+End Namespace

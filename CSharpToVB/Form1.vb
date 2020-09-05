@@ -9,17 +9,14 @@ Imports System.Reflection
 Imports System.Threading
 
 Imports Buildalyzer
-
 Imports CSharpToVBApp
-
-Imports CSharpToVBCodeConverter
-Imports CSharpToVBCodeConverter.ConversionResult
-
+Imports CSharpToVBConverter
+Imports CSharpToVBConverter.ConversionResult
 Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.Emit
 Imports Microsoft.VisualBasic.FileIO
 
-#If Not (NET48 OrElse NET5_0) Then
+#If Not NET5_0 Then
 
 Imports VBMsgBox
 #End If
@@ -269,15 +266,15 @@ Partial Public Class Form1
             End Sub
 
         Using ProgressBar As TextProgressBar = New TextProgressBar(ConversionProgressBar)
+            Dim defaultVBOptions As New DefaultVBOptions
+            With My.Settings
+                defaultVBOptions = New DefaultVBOptions(.OptionCompare, .OptionCompareIncludeInCode, .OptionExplicit, .OptionExplicitIncludeInCode, .OptionInfer, .OptionInferIncludeInCode, .OptionStrict, .OptionStrictIncludeInCode)
+            End With
             ' The System.Progress class invokes the callback on the UI thread. It does this because we create the
             ' System.Progress object on the main thread. During creation, it reads SynchronizationContext.Current so
             ' that it knows how to get back to the main thread to invoke the callback there no matter what thread calls
             ' IProgress.Report.
             Dim progress As New Progress(Of ProgressReport)(AddressOf ProgressBar.Update)
-            Dim defaultVBOptions As New DefaultVBOptions
-            With My.Settings
-                defaultVBOptions = New DefaultVBOptions(.OptionCompare, .OptionCompareIncludeInCode, .OptionExplicit, .OptionExplicitIncludeInCode, .OptionInfer, .OptionInferIncludeInCode, .OptionStrict, .OptionStrictIncludeInCode)
-            End With
             _resultOfConversion = Await Task.Run(Function() ConvertInputRequest(
                                                     RequestToConvert,
                                                     defaultVBOptions,
@@ -295,7 +292,7 @@ Partial Public Class Form1
             mnuFileSaveAs.Enabled = False
             Return False
         Else
-            mnuFileSaveAs.Enabled = Me._resultOfConversion.ResultStatus = ResultTriState.Success
+            mnuFileSaveAs.Enabled = _resultOfConversion.ResultStatus = ResultTriState.Success
         End If
         Select Case _resultOfConversion.ResultStatus
             Case ResultTriState.Success
@@ -596,15 +593,9 @@ Partial Public Class Form1
             My.Settings.Framework
         }
 
-#If NET48 Then
-            Dim VBPreprocessorSymbols As New List(Of KeyValuePair(Of String, Object)) From {
-                New KeyValuePair(Of String, Object)(My.Settings.Framework, True)
-            }
-#Else
             Dim VBPreprocessorSymbols As New List(Of KeyValuePair(Of String, Object)) From {
             KeyValuePair.Create(Of String, Object)(My.Settings.Framework, True)
             }
-#End If
 
             Dim DontDisplayLineNumbers As Boolean = Await Me.Convert_Compile_ColorizeAsync(_requestToConvert, CSPreprocessorSymbols, VBPreprocessorSymbols, SharedReferences.CSharpReferences(Assembly.Load("System.Windows.Forms").Location, OptionalReference:=Nothing).ToArray, _cancellationTokenSource.Token).ConfigureAwait(True)
             If _requestToConvert.CancelToken.IsCancellationRequested Then
@@ -1246,19 +1237,11 @@ Partial Public Class Form1
         Dim convertedFramework As String = FrameworkNameToConstant(Framework)
         Dim CSPreprocessorSymbols As New List(Of String) From {Framework, convertedFramework}
 
-#If NET48 Then
-        Dim VBPreprocessorSymbols As New List(Of KeyValuePair(Of String, Object)) From {
-                                  New KeyValuePair(Of String, Object)(convertedFramework, True)}
-        If Not convertedFramework.Equals(Framework, StringComparison.OrdinalIgnoreCase) Then
-            VBPreprocessorSymbols.Add(New KeyValuePair(Of String, Object)(Framework, True))
-        End If
-#Else
         Dim VBPreprocessorSymbols As New List(Of KeyValuePair(Of String, Object)) From {
                                     KeyValuePair.Create(Of String, Object)(convertedFramework, True)}
         If Not convertedFramework.Equals(Framework, StringComparison.OrdinalIgnoreCase) Then
             VBPreprocessorSymbols.Add(KeyValuePair.Create(Of String, Object)(Framework, True))
         End If
-#End If
 
         For Each currentDocument As Document In currentProject.Documents
             If _cancellationTokenSource.IsCancellationRequested Then

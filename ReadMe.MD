@@ -12,9 +12,9 @@ description: "C# to VB Converter"
 
 ## Requires
 
-- Visual Studio 2019 Version 16.5.0 Preview 1.0 or later to edit the GUI in the solution designer and you need to enable the designer in the Visual Studio Preview. Go to Tools > Options > Environment > Preview Features and select the Use the preview Windows Forms designer for .NET Core application option. 
+- Visual Studio 2019 Preview Version 16.8.0 Preview 2.1  or later to edit the GUI in the solution designer and you need to enable the designer in the Visual Studio Preview. Go to Tools > Options > Environment > Preview Features and select the Use the preview Windows Forms designer for .NET Core application option. 
 - Visual Studio 2019 version 16.3.0 to compile the code it produces
-- .NET Core 3.1 to use the converter
+- .NET 5.0 to use the converter
 
 ## License
 - MIT
@@ -93,14 +93,14 @@ Any changes to CSharpToVB application needs to change the version information in
 +------------------+--------+--------+--------+
 | Module           | Line   | Branch | Method |
 +------------------+--------+--------+--------+
-| VB.CodeConverter | 79.19% | 72.97% | 88.01% |
+| VB.CodeConverter | 79.21% | 73%    | 88.01% |
 +------------------+--------+--------+--------+
 
 +---------+--------+--------+--------+
 |         | Line   | Branch | Method |
 +---------+--------+--------+--------+
-| Total   | 79.19% | 72.97% | 88.01% |
+| Total   | 79.21% | 73%    | 88.01% |
 +---------+--------+--------+--------+
-| Average | 79.19% | 72.97% | 88.01% |
+| Average | 79.2%  | 73%    | 88.01% |
 +---------+--------+--------+--------+
 ```

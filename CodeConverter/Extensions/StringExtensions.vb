@@ -26,22 +26,22 @@ Namespace CSharpToVBConverter
         <Extension>
         Friend Function ConvertCondition(condition As String) As String
             Return condition.
-                Replace("==", "=", StringComparison.Ordinal).
-                Replace("!=", "Not ", StringComparison.Ordinal).
-                Replace("&&", "And", StringComparison.Ordinal).
-                Replace("||", "Or", StringComparison.Ordinal).
-                Replace("!", "Not ", StringComparison.Ordinal).
-                Replace("false", "False", StringComparison.Ordinal).
-                Replace("true", "True", StringComparison.Ordinal).
-                Replace("  ", " ", StringComparison.Ordinal).
-                Replace("//", " ' ", StringComparison.Ordinal)
+                    Replace("==", "=", StringComparison.Ordinal).
+                    Replace("!=", "Not ", StringComparison.Ordinal).
+                    Replace("&&", "And", StringComparison.Ordinal).
+                    Replace("||", "Or", StringComparison.Ordinal).
+                    Replace("!", "Not ", StringComparison.Ordinal).
+                    Replace("false", "False", StringComparison.Ordinal).
+                    Replace("true", "True", StringComparison.Ordinal).
+                    Replace("  ", " ", StringComparison.Ordinal).
+                    Replace("//", " ' ", StringComparison.Ordinal)
         End Function
 
         <Extension>
         Friend Function ConvertTypeArgumentList(TypeString As String) As String
             Return TypeString.
-        Replace("<", "(Of ", StringComparison.Ordinal).
-        Replace(">", ")", StringComparison.Ordinal)
+            Replace("<", "(Of ", StringComparison.Ordinal).
+            Replace(">", ")", StringComparison.Ordinal)
 
         End Function
 
@@ -101,7 +101,7 @@ Namespace CSharpToVBConverter
         <Extension>
         Friend Function RemoveBrackets(input As String) As String
             Return input.Replace("["c, "", StringComparison.Ordinal).
-                     Replace("]"c, "", StringComparison.Ordinal)
+                         Replace("]"c, "", StringComparison.Ordinal)
         End Function
 
         <Extension>

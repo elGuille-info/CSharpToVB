@@ -23,9 +23,9 @@ Namespace CSharpToVBConverter
         End Function
 
 #If NET48 Then
-    Public Overrides Function GetHashCode() As Integer
-        Return (Current, Maximum).GetHashCode()
-    End Function
+        Public Overrides Function GetHashCode() As Integer
+            Return (Current, Maximum).GetHashCode()
+        End Function
 #Else
 
         Public Overrides Function GetHashCode() As Integer

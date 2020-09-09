@@ -806,7 +806,7 @@ End Class")
 End Class")
         End Sub
 
-        <Fact> '(Skip:="System. not removed")>
+        <Fact>
         Public Shared Sub CSharpToVBLabeledAndForStatement()
             TestConversionCSharpToVisualBasic("class GotoTest1
 {

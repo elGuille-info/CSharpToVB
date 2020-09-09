@@ -25,10 +25,15 @@ Namespace My
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Public Sub New()
             MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
-            Me.IsSingleInstance = True
             Me.EnableVisualStyles = True
+            Me.IsSingleInstance = True
+            Me.MinimumSplashScreenDisplayTime = 5000
             Me.SaveMySettingsOnExit = True
+#If Not NET5_0 Then
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
+#Else
+            Me.ShutdownStyle = ApplicationServices.ShutdownMode.AfterMainFormCloses
+#End If
         End Sub
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>

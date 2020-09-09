@@ -373,6 +373,9 @@ Namespace CSharpToVBConverter
         ''' <param name="RemoveLastLineContinuation"></param>
         <Extension()>
         Friend Function WithTrailingEOL(Of T As SyntaxNode)(node As T, RemoveLastLineContinuation As Boolean) As T
+            If node Is Nothing Then
+                Return Nothing
+            End If
             Dim TrailingTrivia As SyntaxTriviaList = node.GetTrailingTrivia
             Dim newTrailingTrivia As New SyntaxTriviaList
             Dim Count As Integer = TrailingTrivia.Count
@@ -408,8 +411,10 @@ Namespace CSharpToVBConverter
                                     Throw UnexpectedValue($"TrailingTrivia(1).RawKind = {TrailingTrivia(1).RawKind}")
                             End Select
                         Case VB.SyntaxKind.EndOfLineTrivia
-                            If TrailingTrivia(1).IsKind(VB.SyntaxKind.WhitespaceTrivia, VB.SyntaxKind.EndOfLineTrivia) Then
+                            If TrailingTrivia(1).IsKind(VB.SyntaxKind.WhitespaceTrivia) Then
                                 Return node.WithTrailingTrivia(VBEOLTrivia)
+                            ElseIf TrailingTrivia(1).IsEndOfLine Then
+                                Return node
                             ElseIf TrailingTrivia(1).IsCommentOrDirectiveTrivia Then
                                 Return node.WithAppendedEOL
                             End If
@@ -498,6 +503,8 @@ Namespace CSharpToVBConverter
                                         newTrailingTrivia = newTrailingTrivia.Add(e.Value)
                                         newTrailingTrivia = newTrailingTrivia.Add(VBEOLTrivia)
                                     Case VB.SyntaxKind.None
+                                        newTrailingTrivia = newTrailingTrivia.Add(e.Value)
+                                    Case VB.SyntaxKind.EndIfDirectiveTrivia
                                         newTrailingTrivia = newTrailingTrivia.Add(e.Value)
                                     Case Else
                                         Stop

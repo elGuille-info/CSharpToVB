@@ -8,8 +8,8 @@ Imports CSharpToVBConverter
 Imports Microsoft.CodeAnalysis
 Imports Factory = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory
 Imports VBS = Microsoft.CodeAnalysis.VisualBasic.Syntax
-
-Module CSharpNodeExtensions
+Namespace CSharpToVBConverter
+    Module CSharpNodeExtensions
 
     <Extension>
     Private Function ExtractConvertedTuple(TupleString As String, Node As CSharp.CSharpSyntaxNode, Model As SemanticModel) As String
@@ -28,7 +28,7 @@ Module CSharpNodeExtensions
 
     <Extension>
     Friend Function ConvertISymbolToNameSyntaxInterfaceName(Node As CSharp.CSharpSyntaxNode, interfaceMethod As ISymbol, Model As SemanticModel) As VBS.NameSyntax
-        Dim TypeString As String = interfaceMethod.ContainingSymbol.ToString
+            Dim TypeString As String = interfaceMethod.ToString
         TypeString = TypeString.ConvertTypeArgumentList.
                                 RemoveBrackets
 
@@ -87,4 +87,5 @@ Module CSharpNodeExtensions
         Return Factory.ImplementsClause(Factory.SeparatedList(SeparatedList))
     End Function
 
-End Module
+    End Module
+End Namespace

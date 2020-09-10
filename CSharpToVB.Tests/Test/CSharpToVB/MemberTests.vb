@@ -602,12 +602,12 @@ Class TestClass
 
     Default Public Property Item(index As Integer) As Object
     Implements System.Collections.IList.Item
-        Get
-            Return index
-        End Get
+    Get
+    Return index
+    End Get
 
-        Set(Value As Object)
-        End Set
+    Set(Value As Object)
+    End Set
     End Property
 End Class")
         End Sub

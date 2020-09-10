@@ -17,14 +17,14 @@ Namespace CSharpToVB.Tests
 "static class TestClass
     {
     void Test() {
-    char a = 'A';
-    a++;
+        char a = 'A';
+        a++;
     }
 }",
 "Module TestClass
 
     Private Sub Test()
-    Dim a As Char = ""A""c
+        Dim a As Char = ""A""c
         a = ChrW(AscW(a)) + 1
     End Sub
 

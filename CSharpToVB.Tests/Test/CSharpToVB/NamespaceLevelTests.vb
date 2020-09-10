@@ -87,13 +87,13 @@ public interface iDisplay {
 
     Default Private Property Item(i As Integer) As Object
     Implements iDisplay.Item
-        Get
-            Throw New NotImplementedException
-        End Get
+    Get
+    Throw New NotImplementedException
+    End Get
 
-        Set(Value As Object)
-            Throw New NotImplementedException
-        End Set
+    Set(Value As Object)
+    Throw New NotImplementedException
+    End Set
     End Property
 End Class
 
@@ -504,8 +504,10 @@ namespace Test
 End Namespace
 
 Namespace Test
+
     Public Class Test1
         Inherits [class].TestClass
+
     End Class
 End Namespace")
         End Sub

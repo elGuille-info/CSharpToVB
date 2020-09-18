@@ -61,46 +61,25 @@ happen but a better translation is possible.
 https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json is added to NuGet Package Source to find
 Microsoft.Dotnet.XUnitExtensions which provides ConditionalFact and PlatformSpecific attributes used for testing.
 
-Any changes to CSharpToVB application needs to change the version information in the project file **AND** in MyProject/AssemblyInfo.vb until Visual Studion is able to general file automatically for a WinForms application.
+Any changes to CSharpToVB application needs to change the version information in the project file **AND** in MyProject/AssemblyInfo.vb until Visual Studio is able to general file automatically for a WinForms application.
 
 ## Major New Release
-  New in 4.6.0.0/4.0.0.0
-
-  - Added or updated 100's of tests (10 skipped and will fail)
-  - Removed redundant tests
-  - Fixed Event Conversion
-  - Fixed Invoking New InvocationExpressions expressions
-  - Improvements in merging and preserving trivia
-  - Improvement in Reference =
-  - Some File menu improvements
-  - Improve compatibility with Core 5.0
-  - Fix translation of + Operator for String
-  - Replace List(Of SyntaxTrivia) with SyntaxTriviaList which caused a lot of changes
-  - Preserve Banner on top of file
-  - Preserve C# numeric literal suffix characters
-  - Fixed math issue with -9223372036854775808 needs to be translated to -9223372036854775808UL
-  - Fixed Issue with When clause in the Case Label
-
-  In Process
-  - Replace FindDialog with Find ToolStrip
-  - Simplify Trivia restructuring removing duplicate code
-  - Finish supporting skipped tests
-  - Improvements in Formating long binary, octal and hex numbers as strings using _ separator
-
+  New in 5.0.0.6/4.0.0.5
+  - Only change from Master is Core 5.0 Support
 
 ## Code Coverage
 ```
 +------------------+--------+--------+--------+
 | Module           | Line   | Branch | Method |
 +------------------+--------+--------+--------+
-| VB.CodeConverter | 79.21% | 73%    | 88.01% |
+| VB.CodeConverter | 79.73% | 73.7%  | 90.13% |
 +------------------+--------+--------+--------+
 
 +---------+--------+--------+--------+
 |         | Line   | Branch | Method |
 +---------+--------+--------+--------+
-| Total   | 79.21% | 73%    | 88.01% |
+| Total   | 79.73% | 73.7%  | 90.13% |
 +---------+--------+--------+--------+
-| Average | 79.2%  | 73%    | 88.01% |
+| Average | 79.73% | 73.7%  | 90.13% |
 +---------+--------+--------+--------+
 ```

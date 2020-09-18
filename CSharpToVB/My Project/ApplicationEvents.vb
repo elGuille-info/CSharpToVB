@@ -10,7 +10,6 @@ Imports Microsoft.VisualBasic.Devices
 
 #End If
 
-
 Namespace My
 
     ' The following events are available for MyApplication:
@@ -22,6 +21,7 @@ Namespace My
     Partial Friend Class MyApplication
 
 #If Not NETCOREAPP3_1 Then
+
         Private Sub MyApplication_NetworkAvailabilityChanged(sender As Object, e As NetworkAvailableEventArgs) Handles Me.NetworkAvailabilityChanged
             ' My.Forms.Form1.SetConnectionStatus(e.IsNetworkAvailable)
         End Sub

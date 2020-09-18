@@ -171,7 +171,7 @@ dotnet_style_qualification_for_method = true:warning
 dotnet_diagnostic.CA1031.severity = silent
 
 # CA1303: Do not pass literals as localized parameters
-dotnet_diagnostic.CA1303.severity = silent
+dotnet_diagnostic.CA1303.severity = none
 
 # CA1308: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1308.severity = suggestion

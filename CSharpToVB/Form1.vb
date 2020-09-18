@@ -11,7 +11,7 @@ Imports CSharpToVBConverter
 Imports Microsoft.CodeAnalysis
 Imports Microsoft.VisualBasic.FileIO
 
-#If Not NET Then
+#If NETCOREAPP3_1 Then
 
 Imports VBMsgBox
 #End If
@@ -676,6 +676,7 @@ Partial Public Class Form1
             launchBrowser(webAddress)
         Catch ex As Exception
             Stop
+            Throw
         Finally
             Cursor = Cursors.AppStarting
             'Devices.Mouse.OverrideCursor = Nothing

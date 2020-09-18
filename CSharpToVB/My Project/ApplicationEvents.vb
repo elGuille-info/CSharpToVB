@@ -4,7 +4,7 @@
 
 Imports Microsoft.VisualBasic.ApplicationServices
 
-#If NET5_0 Then
+#If Not NETCOREAPP3_1 Then
 
 Imports Microsoft.VisualBasic.Devices
 
@@ -20,10 +20,8 @@ Namespace My
     ' StartupNextInstance: Raised when launching a single-instance application and the application is already active.
     ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     Partial Friend Class MyApplication
-        Inherits WindowsFormsApplicationBase
 
-#If NET5_0 Then
-
+#If Not NETCOREAPP3_1 Then
         Private Sub MyApplication_NetworkAvailabilityChanged(sender As Object, e As NetworkAvailableEventArgs) Handles Me.NetworkAvailabilityChanged
             ' My.Forms.Form1.SetConnectionStatus(e.IsNetworkAvailable)
         End Sub
@@ -35,12 +33,9 @@ Namespace My
         End Sub
 
         Private Sub MyApplication_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
-#If False Then
+#If Not NETCOREAPP3_1 Then
             ' Get the splash screen.
-            Dim splash As SplashScreen1 = CType(My.Application.SplashScreen, SplashScreen1)
-            'Display current status information.
-            splash.UserName.Text = "Current user: " & My.User.Name
-            CType(SplashScreen, CSharpToVBApp.SplashScreen1).UserName.Text = "Current user: " & My.User.Name
+            CType(SplashScreen, SplashScreen1).UserName.Text = "Current user: " & User.Name
 #End If
         End Sub
 

@@ -3,9 +3,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>CSharpToVBApp</RootNamespace>
-    <StartupObject>Sub Main</StartupObject>
+    <MyType>WindowsForms</MyType>
+    <StartupObject>CSharpToVBApp.Form1</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
-    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     <OptionCompare>Text</OptionCompare>
     <OptionExplicit>On</OptionExplicit>
     <OptionInfer>Off</OptionInfer>
@@ -36,6 +36,9 @@
     <NoWarn />
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="ApplicationServices\Application.vb" />
+  </ItemGroup>
 
   <ItemGroup>
     <Import Include="System.Data" />

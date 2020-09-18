@@ -7,7 +7,7 @@ Imports System.Threading
 Imports CSharpToVBConverter
 Imports Microsoft.CodeAnalysis
 
-#If Not NET Then
+#If NETCOREAPP3_1 Then
 
 Imports VBMsgBox
 
@@ -147,7 +147,9 @@ Module ProcessFileUtilities
                                                    CancelToken).ConfigureAwait(True)
             Catch ex As OperationCanceledException
                 .ConversionProgressBar.Value = 0
+#Disable Warning CA1031 ' Do not catch general exception types
             Catch ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
                 ' don't crash on exit
                 End
             Finally

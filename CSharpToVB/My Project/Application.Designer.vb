@@ -13,37 +13,31 @@ Option Explicit On
 
 
 Namespace My
-
+    
     'NOTE: This file is auto-generated; do not modify it directly.  To make changes,
     ' or if you encounter build errors in this file, go to the Project Designer
     ' (go to Project Properties or double-click the My Project node in
     ' Solution Explorer), and make changes on the Application tab.
     '
     Partial Friend Class MyApplication
-        Inherits Global.Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase
-
-        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
+        
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Public Sub New()
             MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
-            Me.EnableVisualStyles = True
-            Me.IsSingleInstance = True
-            Me.MinimumSplashScreenDisplayTime = 5000
-            Me.SaveMySettingsOnExit = True
-#If Not NET5_0 Then
+            Me.IsSingleInstance = true
+            Me.EnableVisualStyles = true
+            Me.SaveMySettingsOnExit = true
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
-#Else
-            Me.ShutdownStyle = ApplicationServices.ShutdownMode.AfterMainFormCloses
-#End If
         End Sub
-
-        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
+        
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = New Form1
+            Me.MainForm = Global.CSharpToVBApp.Form1
         End Sub
-
-        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
+        
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateSplashScreen()
-            Me.SplashScreen = New SplashScreen1
+            Me.SplashScreen = Global.CSharpToVBApp.SplashScreen1
         End Sub
     End Class
 End Namespace

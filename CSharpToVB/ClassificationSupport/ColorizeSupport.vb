@@ -34,7 +34,7 @@ Public Module ColorizeSupport
                     MainForm.ListBoxErrorList.Items.Add($"{dia.Id} Line = {dia.Location.GetLineSpan.StartLinePosition.Line + 1} {dia.GetMessage}")
                 Next
             End If
-            Using Progress As New TextProgressBar(MainForm.ConversionProgressBar)
+            Using Progress As New TextProgressBar(MainForm.StatusStripConversionProgressBar)
 
                 Progress.Maximum(Lines)
 
@@ -126,7 +126,7 @@ Public Module ColorizeSupport
                                                       "Stack Overflow"), state:=Nothing)
             End Sub
 
-        Using ProgressBar As TextProgressBar = New TextProgressBar(MainForm.ConversionProgressBar)
+        Using ProgressBar As TextProgressBar = New TextProgressBar(MainForm.StatusStripConversionProgressBar)
             Dim defaultVBOptions As New DefaultVBOptions
             With My.Settings
                 defaultVBOptions = New DefaultVBOptions(.OptionCompare, .OptionCompareIncludeInCode, .OptionExplicit, .OptionExplicitIncludeInCode, .OptionInfer, .OptionInferIncludeInCode, .OptionStrict, .OptionStrictIncludeInCode)

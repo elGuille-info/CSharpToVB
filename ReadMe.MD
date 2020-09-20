@@ -27,7 +27,7 @@ description: "C# to VB Converter"
 - Code Converter
 
 ## Updated
-- 09/02/2020
+- 09/19/2020
 
 ## Description
 This application will convert C# to VB while trying to preserve comments, formatting and as many Directives
@@ -64,6 +64,9 @@ Microsoft.Dotnet.XUnitExtensions which provides ConditionalFact and PlatformSpec
 Any changes to CSharpToVB application needs to change the version information in the project file **AND** in MyProject/AssemblyInfo.vb until Visual Studio is able to general file automatically for a WinForms application.
 
 ## Major New Release
+  New in 5.0.0.7
+  - Sync with master and add Select All support
+
   New in 5.0.0.6/4.0.0.5
   - Only change from Master is Core 5.0 Support
 

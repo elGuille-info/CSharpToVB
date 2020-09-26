@@ -5,7 +5,6 @@
 Imports System.Runtime.CompilerServices
 Imports CSharpToVBConverter.ToVisualBasic.CSharpConverter
 Imports Microsoft.CodeAnalysis
-
 Imports CS = Microsoft.CodeAnalysis.CSharp
 Imports CSS = Microsoft.CodeAnalysis.CSharp.Syntax
 Imports Factory = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory
@@ -65,7 +64,11 @@ Namespace CSharpToVBConverter.ToVisualBasic
                 Dim asClause As VBS.AsClauseSyntax = Nothing
                 If variableDeclaration.Type.IsKind(CS.SyntaxKind.RefType) Then
                 ElseIf Not variableDeclaration.Type.IsVar Then
-                    asClause = Factory.SimpleAsClause(vbType)
+                    If TypeOf v.Initializer.Value Is CSS.ImplicitObjectCreationExpressionSyntax Then
+                        asClause = Factory.AsNewClause(Factory.ObjectCreationExpression(vbType))
+                    Else
+                        asClause = Factory.SimpleAsClause(vbType)
+                    End If
                 Else
                     ' Get Type from Initializer
                     If v.Initializer.Value.IsKind(CS.SyntaxKind.AnonymousObjectCreationExpression) Then

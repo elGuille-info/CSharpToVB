@@ -8,7 +8,6 @@ Imports System.Text
 Imports CSharpToVBConverter.ToVisualBasic
 Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.VisualBasic.Syntax
-
 Imports CS = Microsoft.CodeAnalysis.CSharp
 Imports CSS = Microsoft.CodeAnalysis.CSharp.Syntax
 Imports Factory = Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory
@@ -486,7 +485,7 @@ Namespace CSharpToVBConverter
         ''' <returns></returns>
         Friend Function WrapInComment(nodes As SyntaxList(Of StatementSyntax), NodeWithComments As CSS.StatementSyntax, comment As String) As SyntaxList(Of StatementSyntax)
             If nodes.Any Then
-                nodes = nodes.Replace(nodes(0), nodes(0).WithConvertedTriviaFrom(NodeWithComments).WithPrependedLeadingTrivia(Factory.CommentTrivia($"' BEGIN TODO: {comment}")).WithTrailingEOL(RemoveLastLineContinuation:=True))
+                nodes = nodes.Replace(nodes(0), nodes(0).WithConvertedTriviaFrom(NodeWithComments).WithPrependedLeadingTrivia(Factory.CommentTrivia($"' BEGIN TODO: {comment}")).WithTrailingEOL)
                 nodes = nodes.Add(Factory.EmptyStatement.WithLeadingTrivia(VBEOLTrivia, Factory.CommentTrivia($"' END TODO: {comment}")))
             End If
             Return nodes

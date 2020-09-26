@@ -14,14 +14,13 @@ Imports Microsoft.VisualBasic.FileIO
 #If NETCOREAPP3_1 Then
 
 Imports VBMsgBox
+
 #End If
 
 Partial Public Class Form1
 
     Private Shared ReadOnly s_snippetFileWithPath As String = Path.Combine(SpecialDirectories.MyDocuments, "CSharpToVBLastSnippet.RTF")
-
     Private ReadOnly _frameworkTypeList As New List(Of ToolStripMenuItem)
-
     Private ReadOnly _frameworkVersionList As New Dictionary(Of String, (Item As ToolStripMenuItem, Parent As ToolStripMenuItem))
     Private _currentBuffer As Control
     Friend _cancellationTokenSource As CancellationTokenSource
@@ -110,6 +109,7 @@ Partial Public Class Form1
 
     Private Sub ContextMenuStrip1_Opening(sender As Object, e As CancelEventArgs) Handles ContextMenuStrip1.Opening
         Dim ContextMenu As ContextMenuStrip = CType(sender, ContextMenuStrip)
+
         If TypeOf CurrentBuffer Is RichTextBox Then
             Dim sourceBuffer As RichTextBox = CType(CurrentBuffer, RichTextBox)
             ContextMenu.Items(ContextMenu.IndexOf(NameOf(ContextMenuCopy))).Enabled = sourceBuffer.TextLength > 0 And sourceBuffer.SelectedText.Any
@@ -483,7 +483,7 @@ Partial Public Class Form1
         End If
         MsgBox(prompt,
                MsgBoxStyle.OkOnly Or MsgBoxStyle.Information Or MsgBoxStyle.MsgBoxSetForeground,
-               Title:="Convert C# to Visual Basic")
+               Title:="Convert C# To Visual Basic")
         Dim elapsed As TimeSpan = stopwatch.Elapsed
         StatusStripElapasedTimeLabel.Text = $"Elapsed Time - {elapsed.Hours}: {elapsed.Minutes}:{elapsed.Seconds}.{elapsed.Milliseconds}"
         mnuConvertConvertFolder.Enabled = True
@@ -906,11 +906,13 @@ Partial Public Class Form1
     Private Sub TSFindFindWhatComboBox_Click(sender As Object, e As EventArgs) Handles TSFindFindWhatComboBox.Click
         If TSFindFindWhatComboBox.Text = "Search..." Then
             TSFindFindWhatComboBox.Text = ""
+            TSFindFindWhatComboBox.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub TSFindFindWhatComboBox_Leave(sender As Object, e As EventArgs) Handles TSFindFindWhatComboBox.Leave
         If Not TSFindFindWhatComboBox.Text.Any Then
+            TSFindFindWhatComboBox.ForeColor = SystemColors.GrayText
             TSFindFindWhatComboBox.Text = "Search..."
         End If
     End Sub

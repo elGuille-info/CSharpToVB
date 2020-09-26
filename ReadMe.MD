@@ -27,7 +27,7 @@ description: "C# to VB Converter"
 - Code Converter
 
 ## Updated
-- 09/19/2020
+- 09/25/2020
 
 ## Description
 This application will convert C# to VB while trying to preserve comments, formatting and as many Directives

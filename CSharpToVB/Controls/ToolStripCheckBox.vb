@@ -3,28 +3,29 @@
 ' See the LICENSE file in the project root for more information.
 
 Public Class ToolStripCheckBox
-    Inherits ToolStripControlHost
+    Private Shared ReadOnly localCheckBox As CheckBox = New CheckBox
 
-    <CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification:="No reason, it is disposed on close")>
     Public Sub New()
-        MyBase.New(New CheckBox)
+        MyBase.New(localCheckBox)
     End Sub
 
-    Private ReadOnly Property CheckBoxControl() As CheckBox
-        Get
-            Return CType(Control, CheckBox)
-        End Get
-    End Property
+    'Declare the event
+    Public Event CheckedChanged As EventHandler
 
     'Expose the CheckBoxControl's Checked Property
     Public Property Checked() As Boolean
         Get
-            Return CheckBoxControl.Checked
+            Return CType(Me.Control, CheckBox).Checked
         End Get
         Set(value As Boolean)
-            CheckBoxControl.Checked = value
+            CType(Me.Control, CheckBox).Checked = value
         End Set
     End Property
+
+    'Raise the event
+    Private Sub CheckedChangedHandler(sender As Object, e As EventArgs)
+        RaiseEvent CheckedChanged(Me, e)
+    End Sub
 
     'Subscribe and Unsubscribe the events you wish to expose
     Protected Overrides Sub OnSubscribeControlEvents(control As Control)
@@ -34,10 +35,8 @@ Public Class ToolStripCheckBox
         'Connect the base events
         MyBase.OnSubscribeControlEvents(control)
 
-        'Cast the control to a ChckBox control
-        Dim checkBoxControl As CheckBox = CType(control, CheckBox)
         'Add any events you want to expose
-        AddHandler checkBoxControl.CheckedChanged, AddressOf Me.CheckedChangedHandler
+        AddHandler CType(control, CheckBox).CheckedChanged, AddressOf Me.CheckedChangedHandler
     End Sub
 
     Protected Overrides Sub OnUnsubscribeControlEvents(control As Control)
@@ -47,18 +46,8 @@ Public Class ToolStripCheckBox
         'Disconnect the base events
         MyBase.OnUnsubscribeControlEvents(control)
 
-        'Cast the control to a CheckBox control
-        Dim checkBoxControl As CheckBox = CType(control, CheckBox)
         'Remove any events you have exposed
-        RemoveHandler checkBoxControl.CheckedChanged, AddressOf Me.CheckedChangedHandler
-    End Sub
-
-    'Declare the event
-    Public Event CheckedChanged As EventHandler
-
-    'Raise the event
-    Private Sub CheckedChangedHandler(sender As Object, e As EventArgs)
-        RaiseEvent CheckedChanged(Me, e)
+        RemoveHandler CType(control, CheckBox).CheckedChanged, AddressOf Me.CheckedChangedHandler
     End Sub
 
 End Class

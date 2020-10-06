@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>net5.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Authors>Paul M Cohen</Authors>
+    <Company>Travel By Paul</Company>
+    <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <RepositoryUrl>https://github.com/paul1956/CSharpToVB</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

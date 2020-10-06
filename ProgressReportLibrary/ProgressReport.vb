@@ -1,9 +1,8 @@
 ﻿' Licensed to the .NET Foundation under one or more agreements.
 ' The .NET Foundation licenses this file to you under the MIT license.
 ' See the LICENSE file in the project root for more information.
-Namespace CSharpToVBConverter
 
-    Public Structure ProgressReport
+Public Structure ProgressReport
         Implements IEquatable(Of ProgressReport)
 
         Public Sub New(Current As Integer, Maximum As Integer)
@@ -24,7 +23,7 @@ Namespace CSharpToVBConverter
 
 #If NET48 Then
         Public Overrides Function GetHashCode() As Integer
-            Return (Current, Maximum).GetHashCode()
+            Return (Me.Current, Me.Maximum).GetHashCode()
         End Function
 #Else
 
@@ -43,5 +42,3 @@ Namespace CSharpToVBConverter
         End Operator
 
     End Structure
-
-End Namespace

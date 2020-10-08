@@ -21,6 +21,9 @@ Namespace My
 
     End Module
 
+    Partial Friend Class MyApplication
+        Inherits WindowsFormsApplicationBase
+    End Class
 End Namespace
 
 #End If

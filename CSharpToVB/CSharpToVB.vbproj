@@ -59,7 +59,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="3.8.0-3.final" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0-rc.1.20451.14" />
     <PackageReference Include="NuGet.Frameworks" Version="5.8.0-preview.3.6823" />
-    <PackageReference Include="PInvoke.Windows.Core" Version="0.6.49" />
+    <PackageReference Include="PInvoke.Windows.Core" Version="0.7.78" />
     <PackageReference Include="System.Collections.Immutable" Version="5.0.0-rc.1.20451.14" />
     <PackageReference Include="System.Reflection.Metadata" Version="5.0.0-rc.1.20451.14" />
   </ItemGroup>

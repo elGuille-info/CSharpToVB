@@ -47,16 +47,24 @@ Public Module ProcessProjectUtilities
             Case 1
                 Return New List(Of String)({TargetFrameworks(0)})
             Case Else
-                Using F As New FrameworkSelectionDialog
-                    If Debugger.IsAttached Then
-                        Return TargetFrameworks.ToList
-                    End If
-                    F.SetFrameworkList(TargetFrameworks)
-                    If F.ShowDialog <> DialogResult.OK Then
-                        Return New List(Of String)
-                    End If
-                    Return New List(Of String)({F.CurrentFramework})
-                End Using
+                Dim page As TaskDialogPage = New TaskDialogPage
+                For Each s As IndexClass(Of String) In TargetFrameworks.WithIndex
+                    page.RadioButtons.Add(New TaskDialogRadioButton(s.Value) With
+                                          {.Checked = s.IsFirst}
+                                         )
+                Next
+                page.Caption = "Select Framework"
+                page.Text = "Selected Framework is use to set 'Framework' #const used for conversion. Only one Framework per project can be converted at a time. Merging multiple Frameworks is not automatically supported"
+                page.Buttons.Add(New TaskDialogButton("OK"))
+                page.Buttons.Add(New TaskDialogButton("Cancel"))
+                page.DefaultButton = page.Buttons(0)
+                Dim taskDialogResult As TaskDialogButton = TaskDialog.ShowDialog(Form1.Handle, page, TaskDialogStartupLocation.CenterOwner)
+
+                If taskDialogResult.Text = TaskDialogButton.OK.Text Then
+                    Return {page.RadioButtons.Where(Function(b As TaskDialogRadioButton) b.Checked = True).First.Text}.ToList
+                Else
+                    Return New List(Of String)
+                End If
         End Select
     End Function
 
@@ -109,7 +117,7 @@ Public Module ProcessProjectUtilities
             Await Task.Delay(100).ConfigureAwait(True)
         End While
         If frameworkList.Count = 0 Then
-            Return ($"no framework is specified, processing project will terminate!", New List(Of String))
+            Return ($"No framework is specified, processing project will terminate!", New List(Of String))
         End If
         Dim projectsToBeAdd As New List(Of String)
         Using workspace As AdhocWorkspace = TaskWorkspace.Result
@@ -307,7 +315,9 @@ Public Module ProcessProjectUtilities
                     totalProjects:=1,
                     MainForm._cancellationTokenSource).ConfigureAwait(True)).ErrorPrompt
 
-                If prompt.Length = 0 Then
+                Dim ConversionComplete As Boolean = prompt.Length = 0
+
+                If ConversionComplete Then
 #Disable Warning CA1308 ' Normalize strings to uppercase
                     prompt = $"{If(MainForm._cancellationTokenSource.Token.IsCancellationRequested, "Conversion canceled", "Conversion completed")}, {MainForm.StatusStripConversionFileProgressLabel.Text.ToLower(CultureInfo.InvariantCulture)} completed successfully."
 #Enable Warning CA1308 ' Normalize strings to uppercase
@@ -315,10 +325,11 @@ Public Module ProcessProjectUtilities
                 MsgBox(prompt,
                        MsgBoxStyle.OkOnly Or If(prompt.Contains("terminated", StringComparison.OrdinalIgnoreCase), MsgBoxStyle.Critical, MsgBoxStyle.Information) Or MsgBoxStyle.MsgBoxSetForeground,
                        Title:="Convert C# to Visual Basic")
-
-                Dim projectSavePath As String = DestinationFilePath(fileName, saveSolutionRoot)
-                If Directory.Exists(projectSavePath) AndAlso Not MainForm._cancellationTokenSource.IsCancellationRequested Then
-                    Process.Start("explorer.exe", $"/root,{projectSavePath}")
+                If ConversionComplete Then
+                    Dim projectSavePath As String = DestinationFilePath(fileName, saveSolutionRoot)
+                    If Directory.Exists(projectSavePath) Then
+                        Process.Start("explorer.exe", $"/root,{projectSavePath}")
+                    End If
                 End If
             End If
         Catch ex As ObjectDisposedException

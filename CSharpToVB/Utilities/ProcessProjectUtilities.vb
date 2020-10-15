@@ -47,6 +47,18 @@ Public Module ProcessProjectUtilities
             Case 1
                 Return New List(Of String)({TargetFrameworks(0)})
             Case Else
+#If NETCOREAPP3_1 Then
+                Using F As New FrameworkSelectionDialog
+                    If Debugger.IsAttached Then
+                        Return TargetFrameworks.ToList
+                    End If
+                    F.SetFrameworkList(TargetFrameworks)
+                    If F.ShowDialog <> DialogResult.OK Then
+                        Return New List(Of String)
+                    End If
+                    Return New List(Of String)({F.CurrentFramework})
+                End Using
+#Else
                 Dim page As TaskDialogPage = New TaskDialogPage
                 For Each s As IndexClass(Of String) In TargetFrameworks.WithIndex
                     page.RadioButtons.Add(New TaskDialogRadioButton(s.Value) With
@@ -65,6 +77,7 @@ Public Module ProcessProjectUtilities
                 Else
                     Return New List(Of String)
                 End If
+#End If
         End Select
     End Function
 

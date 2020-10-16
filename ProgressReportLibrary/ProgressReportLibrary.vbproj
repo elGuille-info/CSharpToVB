@@ -5,10 +5,11 @@
     <TargetFramework>net5.0</TargetFramework>
     <Authors>Paul M Cohen</Authors>
     <Company>Travel By Paul</Company>
+    <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <RepositoryUrl>https://github.com/paul1956/CSharpToVB</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en-US</NeutralLanguage>
     <Description>Class used to pass around progress information</Description>
-    <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
   </PropertyGroup>
 
 </Project>

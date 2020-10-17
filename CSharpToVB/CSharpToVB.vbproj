@@ -36,10 +36,6 @@
     <NoWarn />
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Forms\FrameworkSelectionDialog.Designer.vb" />
-    <Compile Remove="Forms\FrameworkSelectionDialog.vb" />
-  </ItemGroup>
 
   <ItemGroup>
     <Import Include="System.Data" />
@@ -66,6 +62,10 @@
     <PackageReference Include="PInvoke.Windows.Core" Version="0.7.78" />
     <PackageReference Include="System.Collections.Immutable" Version="5.0.0-rc.1.20451.14" />
     <PackageReference Include="System.Reflection.Metadata" Version="5.0.0-rc.1.20451.14" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp3.1'">
+    <Compile Remove="Forms\FrameworkSelectionDialog.Designer.vb" />
+    <Compile Remove="Forms\FrameworkSelectionDialog.vb" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="VBMsgBox" Version="1.0.2" />

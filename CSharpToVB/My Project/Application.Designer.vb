@@ -32,12 +32,20 @@ Namespace My
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
+#If NETCOREAPP3_1 Then
+            Me.MainForm = New Form1
+#Else
             Me.MainForm = Global.CSharpToVBApp.Form1
+#End If
         End Sub
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateSplashScreen()
+#If NETCOREAPP3_1 Then
+            Me.SplashScreen = New SplashScreen1
+#Else
             Me.SplashScreen = Global.CSharpToVBApp.SplashScreen1
+#End If
         End Sub
     End Class
 End Namespace

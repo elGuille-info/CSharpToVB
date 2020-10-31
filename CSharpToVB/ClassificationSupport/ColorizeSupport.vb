@@ -167,7 +167,9 @@ Public Module ColorizeSupport
                 End If
             Case ResultTriState.Ignore
                 MainForm.ConversionOutput.Text = ""
+#Disable Warning CA1303 ' Do not pass literals as localized parameters
                 MainForm.LabelErrorCount.Text = "File Skipped"
+#Enable Warning CA1303 ' Do not pass literals as localized parameters
         End Select
         Return MainForm._resultOfConversion.ResultStatus <> ResultTriState.Failure
     End Function

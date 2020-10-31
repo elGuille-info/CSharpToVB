@@ -147,7 +147,9 @@ Module ProcessFileUtilities
                                                    CancelToken).ConfigureAwait(True)
             Catch ex As OperationCanceledException
                 .StatusStripConversionProgressBar.Clear()
-            Catch ex As Exception
+#Disable Warning CA1031 ' Do not catch general exception types
+            Catch Ex As Exception
+#Enable Warning CA1031 ' Do not catch general exception types
                 ' don't crash on exit
                 End
             Finally

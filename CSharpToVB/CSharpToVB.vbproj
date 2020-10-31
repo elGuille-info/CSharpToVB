@@ -4,7 +4,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>CSharpToVBApp</RootNamespace>
     <MyType>WindowsForms</MyType>
-    <StartupObject>CSharpToVBApp.Form1</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <OptionCompare>Text</OptionCompare>
     <OptionExplicit>On</OptionExplicit>

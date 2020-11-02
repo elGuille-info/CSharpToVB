@@ -21,7 +21,6 @@
     <RepositoryUrl>https://github.com/paul1956/CSharpToVB</RepositoryUrl>
     <Description>Convert C# to Visual Basic, it can convert snippets, individual files, folders, projects, and solutions.</Description>
     <RepositoryType>git</RepositoryType>
-    <ApplicationIcon>Icons\CStoVB.ico</ApplicationIcon>
     <Product>CSharp To VB Converter</Product>
     <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <PackageId>CSharp To VB Converter</PackageId>
@@ -69,10 +68,6 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="VBMsgBox" Version="1.0.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CodeConverter\CodeConverter.vbproj" />
-    <ProjectReference Include="..\ProgressReportLibrary\ProgressReportLibrary.vbproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="My Project\Application.Designer.vb">

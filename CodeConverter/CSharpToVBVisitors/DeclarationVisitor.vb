@@ -677,17 +677,43 @@ Namespace CSharpToVBConverter.ToVisualBasic
                     body = Factory.List(Of VBS.StatementSyntax)()
                 End If
                 Dim modifiers As List(Of SyntaxToken)
-                If Me.IsModule AndAlso
-                    methodNameToken.ValueText = "Main" AndAlso
+
+                '***********************************************************************
+                ' Changed by Guillermo elGuille-info (https://github.com/elGuille-info)
+                ' Don't check for Me.IsModule because when it's a C# no static class
+                ' it's converted to VB Class and need to add Shared
+                ' and I don't know how to use ConvertModifiers to do so.
+                '***********************************************************************
+
+                'If Me.IsModule AndAlso
+                '    methodNameToken.ValueText = "Main" AndAlso
+                '    node.Modifiers.Count = 1 AndAlso
+                '    node.Modifiers(0).IsKind(CS.SyntaxKind.StaticKeyword) Then
+                '   modifiers = PublicModifier.ToList
+
+                If methodNameToken.ValueText = "Main" AndAlso
                     node.Modifiers.Count = 1 AndAlso
                     node.Modifiers(0).IsKind(CS.SyntaxKind.StaticKeyword) Then
-                    modifiers = PublicModifier.ToList
+                    If Me.IsModule Then
+                        modifiers = PublicModifier.ToList
+                    Else
+                        modifiers = PublicModifier.ToList
+                        modifiers.AddRange(ConvertModifiers(node.Modifiers, Me.IsModule, If(containingType?.IsInterfaceType() = True, TokenContext.Local, TokenContext.Member)).ToList)
+                        Dim index As Integer = -1
+                        For i As Integer = modifiers.Count - 1 To 0 Step -1
+                            If modifiers(i).Text = PrivateKeyword.Text Then
+                                index = i
+                                Exit For
+                            End If
+                        Next
+                        If index > -1 Then
+                            modifiers.RemoveAt(index)
+                        End If
+                    End If
                 Else
                     modifiers = ConvertModifiers(node.Modifiers, Me.IsModule, If(containingType?.IsInterfaceType() = True, TokenContext.Local, TokenContext.Member)).ToList
                 End If
-                If visitor.IsInterator And Not returnVoid Then
-                    modifiers.Add(IteratorKeyword)
-                End If
+
                 If node.ParameterList.Parameters.Any AndAlso node.ParameterList.Parameters(0).Modifiers.Any(CS.SyntaxKind.ThisKeyword) Then
                     Dim newLeadingTrivia As SyntaxTriviaList
                     If attributes.Any AndAlso attributes(0).HasLeadingTrivia Then

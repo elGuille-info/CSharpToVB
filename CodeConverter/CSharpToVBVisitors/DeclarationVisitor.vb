@@ -677,6 +677,7 @@ Namespace CSharpToVBConverter.ToVisualBasic
                     body = Factory.List(Of VBS.StatementSyntax)()
                 End If
                 Dim modifiers As List(Of SyntaxToken)
+<<<<<<< HEAD
 
                 '***********************************************************************
                 ' Changed by Guillermo elGuille-info (https://github.com/elGuille-info)
@@ -694,11 +695,17 @@ Namespace CSharpToVBConverter.ToVisualBasic
                 If methodNameToken.ValueText = "Main" AndAlso
                     node.Modifiers.Count = 1 AndAlso
                     node.Modifiers(0).IsKind(CS.SyntaxKind.StaticKeyword) Then
+=======
+                If methodNameToken.ValueText = "Main" AndAlso
+                            node.Modifiers.Count = 1 AndAlso
+                            node.Modifiers(0).IsKind(CS.SyntaxKind.StaticKeyword) Then
+>>>>>>> ab7dcad0fb3190b812e37cacb3308f38b657f5bf
                     If Me.IsModule Then
                         modifiers = PublicModifier.ToList
                     Else
                         modifiers = PublicModifier.ToList
                         modifiers.AddRange(ConvertModifiers(node.Modifiers, Me.IsModule, If(containingType?.IsInterfaceType() = True, TokenContext.Local, TokenContext.Member)).ToList)
+<<<<<<< HEAD
                         Dim index As Integer = -1
                         For i As Integer = modifiers.Count - 1 To 0 Step -1
                             If modifiers(i).Text = PrivateKeyword.Text Then
@@ -706,6 +713,10 @@ Namespace CSharpToVBConverter.ToVisualBasic
                                 Exit For
                             End If
                         Next
+=======
+                        'modifiers.Remove(PrivateKeyword)
+                        Dim index As Integer = modifiers.IndexOf(VB.SyntaxKind.PrivateKeyword)
+>>>>>>> ab7dcad0fb3190b812e37cacb3308f38b657f5bf
                         If index > -1 Then
                             modifiers.RemoveAt(index)
                         End If
